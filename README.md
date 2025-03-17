@@ -1,4 +1,4 @@
-# Real-Time-Disaster-and-Crisis-Resource-Tracker
+## Real-Time-Disaster-and-Crisis-Resource-Tracker
 
 # Disaster Resource Management System
 
@@ -31,7 +31,7 @@ A web and mobile-based platform designed to help communities manage resources an
 - Google Maps API (Location-based tracking)
 - TensorFlow.js / OpenAI API (Chatbot & AI Integration)
 
-## 📂 Folder Structure
+## 💾 Folder Structure
 ```
 / project-root
   |-- backend (Node.js/Django API)
@@ -87,7 +87,7 @@ Deploy to AWS EC2 / Heroku.
 4. Push to the branch (`git push origin feature-name`).
 5. Submit a pull request.
 
-## 📜 License
+## 🐜 License
 This project is open-source under the MIT License.
 
 ---
