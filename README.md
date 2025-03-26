@@ -1,23 +1,25 @@
-## Real-Time-Disaster-and-Crisis-Resource-Tracker
+## Mental Health & Sleep Aid Platform 
 
-# Disaster Resource Management System
+## Plesant Sleep
 
 ## 📌 Project Overview
-A web and mobile-based platform designed to help communities manage resources and provide assistance during disasters. The platform connects victims, volunteers, and authorities for better disaster response and recovery.
+A web and mobile-based platform designed to provide real-time psychological support and sleep improvement tools. The platform offers AI-powered mental health assistance, sleep tracking, community support, and therapist access to help users improve their well-being.
 
 ## 🚀 Features
 - **User Authentication** (Login/Signup with Firebase or OAuth)
-- **Disaster Reports & Alerts** (Real-time notifications)
-- **Resource Allocation & Tracking**
-- **Volunteer Coordination**
-- **Map Integration for Disaster Zones**
-- **AI-Powered Chatbot for Assistance**
+- **AI-Powered Mental Health Chatbot** (Real-time psychological support)
+- **Sleep Tracking & Analytics** (Monitor sleep patterns & quality)
+- **Mood & Stress Monitoring** (AI-driven emotional insights)
+- **Guided Meditation & Sleep Sounds** (Relaxation tools for better sleep)
+- **Community Support & Forums** (Anonymous mental health discussions)
+- **Therapist Booking System** (Secure chat & appointment scheduling)
+- **Smart Notifications & Recommendations** (Daily mental wellness tips)
 
 ## 🛠️ Tech Stack
 ### **Backend:**
-- Node.js (Express.js) / Python (Django/FastAPI)
-- PostgreSQL / MongoDB
-- Firebase Auth / OAuth
+- Node.js (Express.js)
+- MongoDB / PostgreSQL
+- Firebase Authentication (OAuth)
 
 ### **Frontend:**
 - React.js (Web App)
@@ -28,13 +30,14 @@ A web and mobile-based platform designed to help communities manage resources an
 - Vercel / Firebase Hosting / AWS EC2 (Deployment)
 
 ### **Other Services:**
-- Google Maps API (Location-based tracking)
-- TensorFlow.js / OpenAI API (Chatbot & AI Integration)
+- OpenAI API / Dialogflow (AI Chatbot)
+- Google Fit / Apple Health API (Sleep Tracking)
+- Google Maps API (Therapist Location Services)
 
-## 💾 Folder Structure
+## 📂 Folder Structure
 ```
 / project-root
-  |-- backend (Node.js/Django API)
+  |-- backend (Node.js API)
   |-- frontend (React.js Web App)
   |-- mobile-app (React Native / Flutter)
   |-- docs (Documentation)
@@ -45,26 +48,31 @@ A web and mobile-based platform designed to help communities manage resources an
 ### 1️⃣ Clone the Repository
 ```sh
 git clone https://github.com/your-repo-name.git
-cd disaster-management
+cd mental-health-sleep-aid
 ```
+
 ### 2️⃣ Backend Setup (Node.js Example)
 ```sh
 cd backend
 npm install
 npm start
 ```
+
 ### 3️⃣ Frontend Setup (React.js Example)
 ```sh
 cd frontend
 npm install
 npm start
 ```
+
 ### 4️⃣ Environment Variables
 Create a `.env` file in the backend directory:
 ```sh
 PORT=5000
 MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/dbname
 JWT_SECRET=supersecuresecret
+OPENAI_API_KEY=your_api_key
+FIREBASE_API_KEY=your_firebase_key
 ```
 
 ## 🚀 Deployment
@@ -87,9 +95,9 @@ Deploy to AWS EC2 / Heroku.
 4. Push to the branch (`git push origin feature-name`).
 5. Submit a pull request.
 
-## 🐜 License
+## 📜 License
 This project is open-source under the MIT License.
 
 ---
-🚀 **Let's build a powerful disaster response system together!**
+🚀 **Let's build a platform that supports mental well-being and better sleep for everyone!**
 
