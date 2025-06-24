@@ -108,15 +108,30 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/mindease.git
-cd mindease
+git clone https://github.com/kalviumcommunity/S69_Rachel_Capstone-PleasantSleep.git
+cd S69_Rachel_Capstone-PleasantSleep
 
-# Backend setup
-cd server
+# Install dependencies
 npm install
+
+# Start the development server
 npm run dev
+```
 
-# Frontend setup
-cd client
-npm install
-npm start
+## 🚀 Getting Started
+
+1. Clone this repository
+2. Install dependencies with `npm install`
+3. Run `npm run dev` to start the development server
+4. Open your browser and navigate to `http://localhost:5173`
+
+## 📱 Live Demo
+
+Visit the live application: [Pleasant Sleep - MindEase](https://your-deployment-url.com)
+
+---
+
+## 👨‍💻 Developer
+
+**Rachel** - Full Stack Developer  
+GitHub: [@kalviumcommunity](https://github.com/kalviumcommunity)
