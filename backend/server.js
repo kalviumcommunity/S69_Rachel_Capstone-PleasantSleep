@@ -1,9 +1,26 @@
-// Example: server.js
+// server.js
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+
 const app = express();
 const PORT = 3000;
 
-// Sample GET endpoint
+// Middleware
+app.use(express.json());
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Make sure this folder exists
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
+
+// GET endpoints
 app.get('/api/healthtips', (req, res) => {
   res.json({
     success: true,
@@ -11,7 +28,6 @@ app.get('/api/healthtips', (req, res) => {
   });
 });
 
-// Another example GET
 app.get('/api/sleepdata', (req, res) => {
   res.json({
     hoursSlept: 7,
@@ -19,12 +35,7 @@ app.get('/api/sleepdata', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
-app.use(express.json());
-
+// POST endpoints
 app.post('/api/sleepdata', (req, res) => {
   const { hours, quality } = req.body;
 
@@ -53,14 +64,16 @@ app.post('/api/feedback', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// File upload endpoint
+app.post('/api/upload', upload.single('file'), (req, res) => {
+  res.json({
+    success: true,
+    filename: req.file.filename,
+    message: 'File uploaded successfully',
+  });
 });
 
-
-app.use(express.json()); 
-
-// Sample PUT endpoint for updating user data
+// PUT endpoints
 app.put('/api/user/:id', (req, res) => {
   const userId = req.params.id;
   const updatedData = req.body;
@@ -74,8 +87,7 @@ app.put('/api/user/:id', (req, res) => {
   });
 });
 
+// Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-
