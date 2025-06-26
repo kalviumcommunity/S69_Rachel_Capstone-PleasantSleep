@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const session = require('express-session');
 const User = require('./models/User');
 const app = express();
 const PORT = 3000;
@@ -41,6 +44,40 @@ app.post('/api/login', async (req, res) => {
 
   res.json({ success: true, token });
 });
+
+// Session setup
+app.use(session({ secret: 'secret123', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Serialize user
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+// Configure Google Strategy
+passport.use(new GoogleStrategy({
+  clientID: 'GOOGLE_CLIENT_ID',
+  clientSecret: 'GOOGLE_CLIENT_SECRET',
+  callbackURL: "/auth/google/callback"
+}, (accessToken, refreshToken, profile, done) => {
+  return done(null, profile);
+}));
+
+// Routes
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    res.send('Login successful with Google! User: ' + JSON.stringify(req.user));
+  }
+);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
