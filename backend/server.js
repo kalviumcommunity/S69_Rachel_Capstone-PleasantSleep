@@ -56,3 +56,24 @@ app.post('/api/feedback', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+app.use(express.json()); 
+
+// Sample PUT endpoint for updating user data
+app.put('/api/user/:id', (req, res) => {
+  const userId = req.params.id;
+  const updatedData = req.body;
+
+  // Logic to update user in database would go here
+
+  res.json({
+    success: true,
+    message: `User with ID ${userId} updated successfully.`,
+    data: updatedData
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
