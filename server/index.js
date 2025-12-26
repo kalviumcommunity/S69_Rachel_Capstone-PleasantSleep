@@ -45,6 +45,31 @@ app.post("/api/users", (req, res) => {
   });
 });
 
+
+app.put("/api/users/:username", (req, res) => {
+  const { username } = req.params;
+  const { email } = req.body;
+
+
+  const user = users.find(u => u.username === username);
+
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      message: "User not found"
+    });
+  }
+
+  if (email) user.email = email;
+
+  res.status(200).json({
+    success: true,
+    message: "User updated successfully",
+    user
+  });
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
