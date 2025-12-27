@@ -1,17 +1,16 @@
-import express from "express";
+import express from "express"; 
 import cors from "cors";
 import mongoose from "mongoose";
-import User from "./models/User.js"; 
+import User from "./models/User.js";
+import Message from "./models/Message.js";
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/ai-chat", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose.connect("mongodb://127.0.0.1:27017/ai-chat")
 .then(() => console.log("MongoDB connected successfully"))
 .catch(err => console.error("MongoDB connection error:", err));
 
@@ -48,7 +47,10 @@ app.post("/api/users", async (req, res) => {
   try {
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(400).json({ success: false, message: "Username already exists" });
+      return res.status(400).json({
+        success: false,
+        message: "Username already exists"
+      });
     }
 
     const newUser = new User({ username, email });
@@ -71,7 +73,10 @@ app.put("/api/users/:username", async (req, res) => {
   try {
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
+      });
     }
 
     if (email) user.email = email;
@@ -81,6 +86,48 @@ app.put("/api/users/:username", async (req, res) => {
       success: true,
       message: "User updated successfully",
       user
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+app.post("/api/messages", async (req, res) => {
+  const { userId, content } = req.body;
+
+  if (!userId || !content) {
+    return res.status(400).json({
+      success: false,
+      message: "userId and content are required"
+    });
+  }
+
+  try {
+    const message = new Message({
+      content,
+      sender: userId 
+    });
+
+    await message.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Message created successfully",
+      data: message
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+app.get("/api/messages", async (req, res) => {
+  try {
+    const messages = await Message.find()
+      .populate("sender", "username email"); 
+
+    res.status(200).json({
+      success: true,
+      messages
     });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
